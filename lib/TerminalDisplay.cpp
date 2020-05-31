@@ -20,6 +20,10 @@
     02110-1301  USA.
 */
 
+// Disable keyboard navigation of terminal buffer. Useful for tmux
+// and other programs that might want to use Shift+Up/Down etc.
+#define DISABLE_NAV true
+
 // Own
 #include "TerminalDisplay.h"
 
@@ -2727,7 +2731,7 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
     bool emitKeyPressSignal = true;
 
     // Keyboard-based navigation
-    if ( event->modifiers() == Qt::ShiftModifier )
+    if (!DISABLE_NAV && event->modifiers() == Qt::ShiftModifier )
     {
         bool update = true;
 
